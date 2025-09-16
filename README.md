@@ -2,4 +2,4 @@
 ## Проект
 Этот репозиторий является каркасом для будущего веб-приложения.
 ## Ссылки
-- [Публичная страница на GitHub Pages](https://coldwind560.github.io/my-awesome-project/)
+- [Публичная страница на GitHub Pages](https://coldw1nd.github.io/my-awesome-project/)

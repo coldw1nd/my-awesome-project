@@ -11,36 +11,40 @@
  <script src="main.js" defer></script>
 </head>
 <body>
- <header>
- <a href="/">Логотип или название сайта</a>
- <!-- Главное меню навигации -->
- <nav>
- <ul>
- <li><a href="index.html">Главная</a></li>
- <li><a href="about.html">О нас</a></li>
- <li><a href="contacts.html">Контакты</a></li>
- </ul>
- </nav>
- </header>
- <main>
+<header class="site-header">
+ <div class="container">
+  <a class="site-header__brand" href="/">Логотип или название сайта</a>
+  <!-- Главное меню навигации -->
+  <nav class="site-nav" aria-label="Основная навигация">
+   <ul class="site-nav__list">
+    <li class="site-nav__item"><a class="site-nav__link" href="index.html">Главная</a></li>
+    <li class="site-nav__item"><a class="site-nav__link" href="about.html">О нас</a></li>
+    <li class="site-nav__item"><a class="site-nav__link site-nav__link--active" href="contacts.html">Контакты</a></li>
+   </ul>
+  </nav>
+ </div>
+</header>
+<main class="container">
  <!-- Простые "хлебные крошки" -->
- <nav aria-label="Хлебные крошки">
- <a href="index.html">Главная</a> →
- <span>Контакты</span>
+ <nav class="breadcrumbs" aria-label="Хлебные крошки">
+  <a class="breadcrumbs__link" href="index.html">Главная</a> →
+  <span class="breadcrumbs__current">Контакты</span>
  </nav>
- <h1>Контакты</h1>
- <section>
- <h2>Наш контактный телефон</h2>
- <p>+7 (123) 456-78-90</p>
+ <h1 class="page-title">Контакты</h1>
+ <section class="section">
+  <h2 class="section__title">Наш контактный телефон</h2>
+  <p>+7 (123) 456-78-90</p>
  </section>
- <section>
- <h2>Наша электронная почта</h2>
- <p>email@mail.ru</p>
+ <section class="section">
+  <h2 class="section__title">Наша электронная почта</h2>
+  <p>email@mail.ru</p>
  </section>
- </main>
- <footer>
- <p>&copy; 2023 Название вашего сайта. Все права защищены.</p>
- <p>Телефон: +7 (123) 456-78-90</p>
- </footer>
+</main>
+<footer class="site-footer">
+ <div class="container">
+  <p>&copy; 2023 Название вашего сайта. Все права защищены.</p>
+  <p>Телефон: +7 (123) 456-78-90</p>
+ </div>
+</footer>
 </body>
 </html>

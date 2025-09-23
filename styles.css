@@ -1,66 +1,260 @@
-/* Базовые стили для читаемости и сброса отступов */
-* { 
- box-sizing: border-box; 
+/* Переменные (токены) для всего сайта */
+/* Чтобы легко менять цвета и отступы в одном месте */
+:root {
+ --color-bg: #f8f9fa;
+ --color-fg: #212529;
+ --color-muted: #6c757d;
+ --color-primary: #0d6efd;
+ --color-danger: #dc3545;
+ --color-white: #fff;
+ --font-body: system-ui, sans-serif;
+ --space-1: 4px;
+ --space-2: 8px;
+ --space-3: 16px;
+ --space-4: 24px;
+ --space-5: 40px;
+ --radius: 8px;
+ --shadow: 0 4px 6px rgba(0, 0, 0, .1);
 }
 
-html, body { 
- margin: 0; 
- padding: 0; 
+/* Базовые стили и сброс */
+* {
+ box-sizing: border-box;
 }
 
-body { 
- font-family: system-ui, sans-serif; 
- line-height: 1.5; 
+html {
+ scroll-behavior: smooth;
 }
 
-/* Стили для элементов формы */
-label { 
- display: block; 
- margin: 0.5rem 0 0.25rem; 
+body {
+ margin: 0;
+ padding: 0;
+ background: var(--color-bg);
+ color: var(--color-fg);
+ font-family: var(--font-body);
+ line-height: 1.6;
 }
 
-input, select, textarea, button {
- width: 100%;
- max-width: 480px;
- padding: .5rem .75rem;
- border: 1px solid #c8c8c8;
- border-radius: 8px;
+img, video {
+ max-width: 100%;
+ height: auto;
+ display: block;
 }
 
-button, [type="submit"] {
- background: #0a84ff;
- color: #fff;
- border: none;
- cursor: pointer;
+.container {
+ width: min(100% - 2 * var(--space-4), 1120px);
+ margin-inline: auto;
 }
 
 /* Стили для состояний элементов */
-:where(input, select, textarea, button):focus-visible {
- outline: 2px solid #0a84ff; 
+
+/* Состояние :focus-visible - чтобы рамка была видна при навигации с клавиатуры (Tab) */
+:where(a, button, input, select, textarea):focus-visible {
+ outline: 2px solid var(--color-primary);
  outline-offset: 2px;
 }
 
-button:hover { 
- filter: brightness(0.95); 
+/* Состояние :target - для подсветки якоря при переходе по ссылке */
+:target {
+ outline: 2px dashed var(--color-primary);
+ outline-offset: 4px;
 }
 
-[aria-invalid="true"] { 
- border-color: #b00020; 
+/* БЭМ-Блок: Шапка сайта (site-header) */
+.site-header {
+ background: var(--color-white);
+ padding-block: var(--space-3);
+ box-shadow: var(--shadow);
 }
 
-/* Стили для модального окна */
-dialog { 
- padding: 1.25rem; 
- border: none; 
- border-radius: 12px; 
+.site-header .container {
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
 }
 
-dialog::backdrop { 
- background: rgba(0,0,0,.5); 
+.site-header__brand {
+ font-size: 1.5rem;
+ font-weight: bold;
+ text-decoration: none;
+ color: var(--color-fg);
 }
 
-.form-actions { 
- display:flex; 
- gap:.5rem; 
- margin-top:1rem; 
+/* БЭМ-Блок: Навигация (site-nav) */
+.site-nav__list {
+ margin: 0;
+ padding: 0;
+ list-style: none;
+ display: flex;
+ gap: var(--space-3);
+}
+
+/* БЭМ: элемент __link внутри блока .site-nav */
+.site-nav__link {
+ text-decoration: none;
+ color: var(--color-muted);
+ padding: var(--space-2) 0;
+}
+
+.site-nav__link:hover {
+ color: var(--color-primary);
+}
+
+/* БЭМ: модификатор --active для активной ссылки */
+.site-nav__link--active {
+ color: var(--color-primary);
+ font-weight: bold;
+ border-bottom: 2px solid var(--color-primary);
+}
+
+/* БЭМ-Блок: "Герой" (hero) */
+/* Медиа: фоновая картинка с градиентом для контраста */
+.hero {
+ background: linear-gradient(to top, rgba(0,0,0,.55), rgba(0,0,0,.15)), url("assets/img/hero.jpg") center/cover no-repeat;
+ color: var(--color-white);
+ padding: 4rem 0;
+ text-align: center;
+}
+
+.hero__title {
+ font-size: 2.5rem;
+ margin: 0;
+}
+
+/* БЭМ-Блок: Секция (section) */
+.section {
+ padding-block: var(--space-5);
+}
+
+.section__title {
+ margin: 0 0 var(--space-3);
+ font-size: 2rem;
+}
+
+/* БЭМ-Блок: Хлебные крошки (breadcrumbs) */
+.breadcrumbs {
+ margin-top: var(--space-4);
+ color: var(--color-muted);
+}
+
+.breadcrumbs__link {
+ color: var(--color-primary);
+ text-decoration: none;
+}
+
+.page-title {
+ margin-top: var(--space-3);
+}
+
+/* Стили для медиа (картинки, видео) */
+.portfolio__image {
+ border-radius: var(--radius);
+ box-shadow: var(--shadow);
+}
+
+/* Медиа: контейнер для видео с фикс. пропорциями (16/9) */
+.media {
+ aspect-ratio: 16/9;
+ width: min(100%, 960px);
+ margin-inline: auto;
+ border-radius: var(--radius);
+ overflow: hidden;
+}
+
+.media iframe {
+ width: 100%;
+ height: 100%;
+ border: 0;
+}
+
+/* БЭМ-Блок: Подвал сайта (site-footer) */
+.site-footer {
+ background: var(--color-fg);
+ color: var(--color-bg);
+ padding-block: var(--space-4);
+ margin-top: var(--space-5);
+}
+
+.site-footer .container {
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+}
+
+/* БЭМ-Блок: Кнопка (button) */
+.button {
+ display: inline-block;
+ background: var(--color-primary);
+ color: var(--color-white);
+ border: none;
+ cursor: pointer;
+ padding: var(--space-2) var(--space-3);
+ border-radius: var(--radius);
+ text-decoration: none;
+ font-family: inherit;
+ font-size: 1rem;
+}
+
+/* Состояние :hover - для изменения вида при наведении мыши */
+.button:hover {
+ filter: brightness(0.9);
+}
+
+.button--secondary {
+ background: var(--color-muted);
+}
+
+/* БЭМ-Блок: Модальное окно (modal) */
+.modal {
+ padding: var(--space-4);
+ border: none;
+ border-radius: var(--radius);
+ box-shadow: var(--shadow);
+ max-width: 500px;
+ width: 90%;
+}
+
+.modal::backdrop {
+ background: rgba(0, 0, 0, .5);
+}
+
+.modal__title {
+ margin: 0 0 var(--space-3);
+}
+
+/* БЭМ-Блок: Форма (form) */
+.form__group {
+ margin-bottom: var(--space-3);
+}
+
+.form__label {
+ display: block;
+ margin-bottom: var(--space-2);
+ color: var(--color-muted);
+}
+
+.form__input {
+ width: 100%;
+ padding: var(--space-2) var(--space-3);
+ border: 1px solid #ccc;
+ border-radius: var(--radius);
+ font-family: inherit;
+}
+
+/* Состояние [aria-invalid="true"] - для стилизации полей с ошибкой */
+.form__input[aria-invalid="true"] {
+ border-color: var(--color-danger);
+}
+
+.form__help {
+ font-size: 0.875rem;
+ color: var(--color-muted);
+ margin-top: var(--space-1);
+ display: block;
+}
+
+.form-actions {
+ display: flex;
+ gap: var(--space-2);
+ margin-top: var(--space-4);
 }

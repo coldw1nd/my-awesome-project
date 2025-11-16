@@ -1,20 +1,34 @@
-/* Используем переменные, чтобы было удобно менять цвета на всем сайте */
 :root {
-    --primary-color: #3498db;
+    color-scheme: light dark;
+    --primary-color: #2563eb;
     --secondary-color: #2c3e50;
     --background-color: #f4f4f4;
     --card-bg-color: #ffffff;
-    --text-color: #333;
+    --text-color: #0b1020;
     --border-radius: 8px;
 }
 
+* { box-sizing: border-box; }
+
+html, body { height: 100%; }
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
     margin: 0;
     background-color: var(--background-color);
     color: var(--text-color);
     line-height: 1.6;
 }
+
+.page {
+    min-height: 100vh;
+    min-height: 100svh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+}
+
+main { flex: 1; }
 
 .container {
     max-width: 960px;
@@ -22,14 +36,35 @@ body {
     padding: 0 20px;
 }
 
-/* Шапка сайта */
+.skip-link{
+    position: absolute;
+    inset-inline-start: 1rem;
+    inset-block-start: -100%;
+    z-index: 10000;
+    padding: .5rem .75rem;
+    background: #111;
+    color: #fff;
+    border-radius: .5rem;
+    text-decoration: none;
+}
+.skip-link:focus,
+.skip-link:focus-visible { inset-block-start: 1rem; }
+
+:focus-visible { outline: 3px solid #2563eb; outline-offset: 2px; }
+a, button, input, textarea { outline-offset: 2px; }
+
 .header {
     background-color: var(--secondary-color);
     color: white;
-    padding: 1rem 0;
-    position: sticky; /* чтобы шапка "прилипала" при скролле */
+    position: sticky;
     top: 0;
     z-index: 100;
+    isolation: isolate;
+    padding-block-start: calc(.75rem + env(safe-area-inset-top));
+    padding-block-end: .75rem;
+    padding-inline-start: calc(1rem + env(safe-area-inset-left));
+    padding-inline-end: calc(1rem + env(safe-area-inset-right));
+    box-shadow: 0 1px 3px rgba(0,0,0,.1);
 }
 
 .header-content {
@@ -38,14 +73,12 @@ body {
     align-items: center;
 }
 
-/* Настраиваем контейнер логотипа для выравнивания */
 .logo {
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-/* Стили для картинки-иконки внутри логотипа */
 .logo img {
     width: 24px;
     height: 24px;
@@ -65,9 +98,9 @@ body {
 .nav a {
     color: white;
     text-decoration: none;
-    padding: 5px 10px;
+    padding: .5rem .75rem;
     border-radius: 5px;
-    transition: background-color 0.2s;
+    transition: background-color 0.2s ease;
 }
 
 .nav a:hover, .nav a.active {
@@ -78,6 +111,12 @@ body {
     padding: 40px 0;
 }
 
+.section, .main {
+    padding-inline: clamp(1rem, calc(.5rem + 1vw), 2rem);
+}
+
+.section-title { font-size: clamp(1.25rem, 1.1rem + 1.2vw, 1.8rem); }
+
 section {
     margin-bottom: 40px;
     background-color: var(--card-bg-color);
@@ -86,7 +125,6 @@ section {
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-/* Стили для главной страницы */
 .about-me {
     display: flex;
     align-items: center;
@@ -94,10 +132,11 @@ section {
 }
 
 .my-photo {
-    width: 150px;
-    height: 150px;
+    inline-size: clamp(150px, 22vw, 200px);
+    height: auto;
     border-radius: 50%;
-    object-fit: cover; /* чтобы фото не искажалось */
+    object-fit: cover;
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 }
 
 .btn {
@@ -109,7 +148,10 @@ section {
     border-radius: 5px;
     border: none;
     cursor: pointer;
+    transition: background-color .2s ease, transform .2s ease;
 }
+
+.btn:hover { transform: translateY(-1px); }
 
 .skill-item {
     margin-bottom: 15px;
@@ -118,7 +160,7 @@ section {
 .progress-bar {
     background-color: #e0e0e0;
     border-radius: 5px;
-    overflow: hidden; /* чтобы внутренний блок не вылезал */
+    overflow: hidden;
 }
 
 .progress {
@@ -131,7 +173,7 @@ section {
 
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 колонки */
+    grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
     gap: 20px;
 }
 
@@ -142,58 +184,101 @@ section {
     border-radius: var(--border-radius);
 }
 
-/* Стили для страницы проектов */
 .projects-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
+    gap: 1rem;
+}
+
+.filter-buttons { display: flex; flex-wrap: wrap; gap: .5rem; }
+
+.filter-btn[aria-pressed="true"],
+.filter-btn.active-filter {
+    background-color: var(--secondary-color);
+    color: white;
+    cursor: default;
 }
 
 .projects-gallery {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2 колонки */
+    grid-template-columns: 1fr;
     gap: 20px;
 }
 
 .project-card {
-    padding: 20px;
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 16px;
     border: 1px solid #ddd;
     border-radius: var(--border-radius);
+    background: #fff;
     cursor: pointer;
+    transition: transform .2s ease, box-shadow .2s ease;
+    min-width: 0;
 }
 
-/* Модальное окно */
+.project-card:hover { transform: translateY(-4px); box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); }
+
+.project-card img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 10;
+     object-fit: contain;
+    border-radius: calc(var(--border-radius) - 2px);
+    margin-bottom: .5rem;
+}
+
+.project-card-title {
+    font-size: 1.15em;
+    font-weight: 600;
+    display: block;
+}
+
+.project-card-title,
+.project-card-description {
+    overflow-wrap: anywhere;
+    margin: .25rem 0;
+}
+
 .modal {
-    display: none; /* по умолчанию скрыто */
+    display: none;
     position: fixed;
     z-index: 200;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.5); /* полупрозрачный фон */
+    inset: 0;
+    background-color: rgba(0,0,0,0.5);
+    padding: 1rem;
 }
 
 .modal-content {
     background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
+    margin: 10vh auto;
+    padding: 20px 24px;
     border-radius: var(--border-radius);
-    width: 80%;
-    max-width: 500px;
+    width: min(90%, 560px);
     position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
 
 .close-button {
-    color: #aaa;
-    float: right;
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    color: #333;
     font-size: 28px;
     font-weight: bold;
     cursor: pointer;
+    background: transparent;
+    border: none;
+    line-height: 1;
+    padding: 6px;
+    border-radius: 6px;
 }
 
-/* Стили для страницы контактов */
+.close-button:focus-visible { outline: 2px solid #2563eb; }
+
 .contact-form .form-group {
     margin-bottom: 15px;
 }
@@ -201,72 +286,89 @@ section {
 .contact-form label {
     display: block;
     margin-bottom: 5px;
+    font-weight: 600;
 }
 
 .contact-form input,
 .contact-form textarea {
     width: 100%;
-    padding: 8px;
-    box-sizing: border-box; /* чтобы padding не влиял на ширину */
+    padding: 10px 12px;
+    box-sizing: border-box;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 6px;
+    font: inherit;
 }
 
-/* Подвал сайта */
+.contact-form textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.contact-form input:focus-visible,
+.contact-form textarea:focus-visible {
+    border-color: #2563eb;
+}
+
+.error-message {
+    color: #b91c1c;
+    margin-top: 6px;
+    font-size: .9rem;
+}
+
+.visually-hidden{
+    position:absolute !important; width:1px; height:1px; padding:0; margin:-1px;
+    overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0;
+}
+
 .footer {
     background-color: var(--secondary-color);
     color: white;
     text-align: center;
     padding: 20px 0;
     margin-top: 40px;
+    padding-bottom: calc(1rem + env(safe-area-inset-bottom));
 }
 
-/* Стиль для активной кнопки фильтра */
-.filter-btn.active-filter {
-    background-color: var(--secondary-color);
-    color: white;
-    cursor: default; /* меняем курсор, т.к. кнопка уже нажата */
+@supports (container-type: inline-size){
+    .projects-area{
+        container-type: inline-size;
+        container-name: projects;
+    }
+    @container projects (min-width: 640px){
+        .projects-list{ grid-template-columns: repeat(2, 1fr); }
+    }
+    @container projects (min-width: 960px){
+        .projects-list{ grid-template-columns: repeat(3, 1fr); }
+    }
 }
 
-/* Адаптивность для мобильных устройств */
+@media (pointer: coarse){
+    a, button, .nav a { min-height: 44px; padding: .75rem 1rem; }
+}
 
-/* Все что ниже, сработает на экранах шириной 768px и меньше */
 @media (max-width: 768px) {
     .header-content {
-        flex-direction: column; /* лого и навигация встанут друг под другом */
+        flex-direction: column;
         gap: 10px;
     }
-
     .nav ul {
-        justify-content: center; /* кнопки навигации по центру */
+        justify-content: center;
     }
-
     .about-me {
-        flex-direction: column; /* фото и текст встанут друг под другом */
+        flex-direction: column;
         text-align: center;
     }
-
-    .projects-grid {
-        grid-template-columns: 1fr 1fr; /* 2 колонки на планшете */
-    }
-
-    .projects-gallery {
-        grid-template-columns: 1fr; /* 1 колонка на телефоне */
-    }
-
     .projects-header {
         flex-direction: column;
         gap: 15px;
+        align-items: stretch;
     }
 }
 
-/* На совсем маленьких экранах  */
-@media (max-width: 480px) {
-    .projects-grid {
-        grid-template-columns: 1fr; /* 1 колонка */
-    }
+@media (prefers-reduced-motion: reduce){
+    * { animation: none !important; transition: none !important; }
+}
 
-    .nav li {
-        margin-left: 10px; /* уменьшим отступы в меню */
-    }
+@media (prefers-contrast: more){
+    .btn, .filter-btn { box-shadow: inset 0 0 0 2px #fff; }
 }

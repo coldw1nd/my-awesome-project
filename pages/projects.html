@@ -2,56 +2,98 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>Мои проекты</title>
     <link rel="stylesheet" href="../styles/styles.css">
 </head>
 <body>
-    <header class="header">
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <img src="../images/icons/profile-icon.svg" alt="Логотип">
-                    <span>Шувалов Станислав</span>
-                </div>
-                <nav class="nav">
-                    <ul>
-                        <li><a href="../index.html">Главная</a></li>
-                        <li><a href="projects.html" class="active">Проекты</a></li>
-                        <li><a href="diary.html">Дневник</a></li>
-                        <li><a href="contacts.html">Контакты</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-    </header>
-    <main class="main">
-        <div class="container">
-            <section class="projects-page">
-                <div class="projects-header">
-                    <h2>Мои проекты</h2>
-                    <div class="filter-buttons">
-                        <button class="btn filter-btn" data-filter="all">Все</button>
-                        <button class="btn filter-btn" data-filter="html">HTML</button>
-                        <button class="btn filter-btn" data-filter="js">JS</button>
-                        <button class="btn filter-btn" data-filter="react">React</button>
+    <a class="skip-link" href="#main">Перейти к основному содержимому</a>
+    <div class="page">
+        <header class="header">
+            <div class="container">
+                <div class="header-content">
+                    <div class="logo">
+                        <img src="../images/icons/profile-icon.svg" alt="" aria-hidden="true">
+                        <span>Шувалов Станислав</span>
                     </div>
+                    <nav class="nav" aria-label="Основная навигация">
+                        <ul>
+                            <li><a href="../index.html">Главная</a></li>
+                            <li><a href="projects.html" class="active" aria-current="page">Проекты</a></li>
+                            <li><a href="diary.html">Дневник</a></li>
+                            <li><a href="contacts.html">Контакты</a></li>
+                        </ul>
+                    </nav>
                 </div>
-                <div class="projects-gallery">
-                    <div class="project-card" data-category="html"><h3>Личный сайт</h3><p>HTML, CSS</p></div>
-                    <div class="project-card" data-category="js"><h3>Todo-приложение</h3><p>JavaScript</p></div>
-                    <div class="project-card" data-category="react"><h3>Интернет-магазин</h3><p>React</p></div>
-                    <div class="project-card" data-category="html"><h3>Портфолио</h3><p>Bootstrap</p></div>
-                </div>
-            </section>
-        </div>
-    </main>
-    <footer class="footer">
-        <div class="container"><p>© 2025 Шувалов Станислав.</p></div>
-    </footer>
+            </div>
+        </header>
+        <main id="main" class="main">
+            <div class="container">
+                <section class="projects-page section">
+                    <div class="projects-header">
+                        <h1 class="section-title">Мои проекты</h1>
+                        <div class="filter-buttons" role="toolbar" aria-label="Фильтр проектов">
+                            <button class="btn filter-btn" data-filter="all" aria-pressed="true">Все</button>
+                            <button class="btn filter-btn" data-filter="html" aria-pressed="false">HTML</button>
+                            <button class="btn filter-btn" data-filter="js" aria-pressed="false">JS</button>
+                            <button class="btn filter-btn" data-filter="react" aria-pressed="false">React</button>
+                        </div>
+                    </div>
+
+                    <div class="projects-area">
+                        <div class="projects-gallery projects-list">
+                            <button type="button" class="project-card" data-category="html">
+                                <picture>
+                                    <source type="image/avif" srcset="../images/projects/html-logo-320.avif 320w, ../images/projects/html-logo-480.avif 480w, ../images/projects/html-logo-720.avif 720w" sizes="(min-width: 960px) 320px, (min-width: 640px) 45vw, 100vw">
+                                    <source type="image/webp" srcset="../images/projects/html-logo-320.webp 320w, ../images/projects/html-logo-480.webp 480w, ../images/projects/html-logo-720.webp 720w" sizes="(min-width: 960px) 320px, (min-width: 640px) 45vw, 100vw">
+                                    <img src="../images/projects/html-logo-720.png" srcset="../images/projects/html-logo-320.png 320w, ../images/projects/html-logo-480.png 480w, ../images/projects/html-logo-720.png 720w" sizes="(min-width: 960px) 320px, (min-width: 640px) 45vw, 100vw" width="640" height="400" loading="lazy" alt="Логотип HTML5">
+                                </picture>
+                                <span class="project-card-title">Личный сайт</span>
+                                <span class="project-card-description">HTML, CSS</span>
+                            </button>
+
+                            <button type="button" class="project-card" data-category="js">
+                                <picture>
+                                    <source type="image/avif" srcset="../images/projects/js-logo-320.avif 320w, ../images/projects/js-logo-480.avif 480w, ../images/projects/js-logo-720.avif 720w" sizes="(min-width: 960px) 320px, (min-width: 640px) 45vw, 100vw">
+                                    <source type="image/webp" srcset="../images/projects/js-logo-320.webp 320w, ../images/projects/js-logo-480.webp 480w, ../images/projects/js-logo-720.webp 720w" sizes="(min-width: 960px) 320px, (min-width: 640px) 45vw, 100vw">
+                                    <img src="../images/projects/js-logo-720.png" srcset="../images/projects/js-logo-320.png 320w, ../images/projects/js-logo-480.png 480w, ../images/projects/js-logo-720.png 720w" sizes="(min-width: 960px) 320px, (min-width: 640px) 45vw, 100vw" width="640" height="400" loading="lazy" alt="Логотип JavaScript">
+                                </picture>
+                                <span class="project-card-title">Todo-приложение</span>
+                                <span class="project-card-description">JavaScript</span>
+                            </button>
+
+                            <button type="button" class="project-card" data-category="react">
+                                <picture>
+                                    <source type="image/avif" srcset="../images/projects/react-logo-320.avif 320w, ../images/projects/react-logo-480.avif 480w, ../images/projects/react-logo-720.avif 720w" sizes="(min-width: 960px) 320px, (min-width: 640px) 45vw, 100vw">
+                                    <source type="image/webp" srcset="../images/projects/react-logo-320.webp 320w, ../images/projects/react-logo-480.webp 480w, ../images/projects/react-logo-720.webp 720w" sizes="(min-width: 960px) 320px, (min-width: 640px) 45vw, 100vw">
+                                    <img src="../images/projects/react-logo-720.png" srcset="../images/projects/react-logo-320.png 320w, ../images/projects/react-logo-480.png 480w, ../images/projects/react-logo-720.png 720w" sizes="(min-width: 960px) 320px, (min-width: 640px) 45vw, 100vw" width="640" height="400" loading="lazy" alt="Логотип React">
+                                </picture>
+                                <span class="project-card-title">Интернет-магазин</span>
+                                <span class="project-card-description">React</span>
+                            </button>
+
+                            <button type="button" class="project-card" data-category="html">
+                                <picture>
+                                    <source type="image/avif" srcset="../images/projects/bootstrap-logo-320.avif 320w, ../images/projects/bootstrap-logo-480.avif 480w, ../images/projects/bootstrap-logo-720.avif 720w" sizes="(min-width: 960px) 320px, (min-width: 640px) 45vw, 100vw">
+                                    <source type="image/webp" srcset="../images/projects/bootstrap-logo-320.webp 320w, ../images/projects/bootstrap-logo-480.webp 480w, ../images/projects/bootstrap-logo-720.webp 720w" sizes="(min-width: 960px) 320px, (min-width: 640px) 45vw, 100vw">
+                                    <img src="../images/projects/bootstrap-logo-720.png" srcset="../images/projects/bootstrap-logo-320.png 320w, ../images/projects/bootstrap-logo-480.png 480w, ../images/projects/bootstrap-logo-720.png 720w" sizes="(min-width: 960px) 320px, (min-width: 640px) 45vw, 100vw" width="640" height="400" loading="lazy" alt="Логотип Bootstrap">
+                                </picture>
+                                <span class="project-card-title">Портфолио</span>
+                                <span class="project-card-description">Bootstrap</span>
+                            </button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+        <footer class="footer">
+            <div class="container"><p>© 2025 Шувалов Станислав.</p></div>
+        </footer>
+    </div>
+
     <div id="project-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-button">&times;</span>
+        <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-description" tabindex="-1">
+            <button class="close-button" aria-label="Закрыть окно">&times;</button>
             <h2 id="modal-title">Название проекта</h2>
             <p id="modal-description">Описание проекта...</p>
         </div>
